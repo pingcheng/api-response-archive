@@ -1,0 +1,21 @@
+{
+    "name": "pingcheng/api-response",
+    "description": "Provide a simple restful API response",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ping Cheng",
+            "email": "ping.cheng@eduplus.net.au"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "PingCheng\\ApiResponse\\": "src/"
+        }
+    }
+}
