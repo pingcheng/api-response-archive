@@ -13,17 +13,7 @@ class JsonResponse extends PacketBase
 
     protected function processData($data)
     {
-        $result = [
-            $this->code_name => $this->code,
-            $this->status_name => $this->status,
-            $this->data_name => $this->data,
-        ];
-
-        foreach ($this->extra_attributes as $key => $value) {
-            $result[$key] = $value;
-        }
-
-        return json_encode($result);
+        return json_encode($this->initResponse());
     }
 
     protected function setHeader()

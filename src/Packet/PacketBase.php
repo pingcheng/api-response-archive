@@ -36,7 +36,6 @@ abstract class PacketBase
 
     /**
      * set up the html header if necessary
-     * @return mixed
      */
     abstract protected function setHeader();
 
@@ -114,6 +113,20 @@ abstract class PacketBase
         }
 
         return $this->processData($this->data);
+    }
+
+    protected function initResponse() {
+        $result = [
+            $this->code_name => $this->code,
+            $this->status_name => $this->status,
+            $this->data_name => $this->data,
+        ];
+
+        foreach ($this->extra_attributes as $key => $value) {
+            $result[$key] = $value;
+        }
+
+        return $result;
     }
 
     /**

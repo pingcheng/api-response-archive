@@ -9,6 +9,7 @@
 namespace PingCheng\ApiResponse;
 
 use PingCheng\ApiResponse\Packet\JsonResponse;
+use PingCheng\ApiResponse\Packet\XmlResponse;
 
 class ApiResponse
 {
@@ -21,6 +22,10 @@ class ApiResponse
      */
     public static function json() {
         return new JsonResponse(static::initOptions());
+    }
+
+    public static function xml() {
+        return new XmlResponse(static::initOptions());
     }
 
     public static function send_header($trueOrfalse = true) {
