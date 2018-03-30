@@ -1,4 +1,6 @@
 # api-response
+[![Build Status](https://travis-ci.org/pingcheng/api-response.svg?branch=master)](https://travis-ci.org/pingcheng/api-response)
+
 A simple PHP API helper to generate JSON or XML result
 
 # Installation
