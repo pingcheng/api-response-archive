@@ -1,5 +1,6 @@
 # api-response
 [![Build Status](https://travis-ci.org/pingcheng/api-response.svg?branch=master)](https://travis-ci.org/pingcheng/api-response)
+[![Coverage Status](https://coveralls.io/repos/github/pingcheng/api-response/badge.svg?branch=master)](https://coveralls.io/github/pingcheng/api-response?branch=master)
 
 A simple PHP API helper to generate JSON or XML result
 
