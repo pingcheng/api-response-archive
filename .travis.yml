@@ -8,6 +8,6 @@ php:
   - nightly
 
 before_script:
-  - composer install
+  - composer update
 
 script: vendor/bin/phpunit
