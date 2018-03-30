@@ -1,6 +1,10 @@
 # api-response
 A simple PHP API helper to generate JSON or XML result
 
+# Installation
+```bash
+composer require pingcheng/api-response
+```
 
 # Supproted format
 | Format  | Support |
