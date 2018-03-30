@@ -13,13 +13,8 @@ class JsonTest extends TestCase
         ]
     ];
 
-    public function __construct(string $name = null, array $data = [], string $dataName = '')
-    {
-        parent::__construct($name, $data, $dataName);
-        ApiResponse::send_header(false);
-    }
-
     public function testSuccess() {
+        ApiResponse::send_header(false);
         $result = ApiResponse::json()
             ->code(200)
             ->data($this->testing_data)
@@ -28,6 +23,7 @@ class JsonTest extends TestCase
     }
 
     public function testError() {
+        ApiResponse::send_header(false);
         $result = ApiResponse::json()
             ->code(400)
             ->data($this->testing_data)
@@ -36,6 +32,7 @@ class JsonTest extends TestCase
     }
 
     public function testFatal() {
+        ApiResponse::send_header(false);
         $result = ApiResponse::json()
             ->code(500)
             ->data($this->testing_data)
