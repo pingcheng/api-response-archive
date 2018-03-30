@@ -10,4 +10,6 @@ php:
 before_script:
   - composer update
 
-script: vendor/bin/phpunit tests
+script:
+  - vendor/bin/phpunit
+  - vendor/bin/php-coveralls -v
