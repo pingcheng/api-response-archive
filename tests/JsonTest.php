@@ -17,6 +17,9 @@ class JsonTest extends TestCase
         $result = ApiResponse::json()
             ->code(200)
             ->data($this->testing_data)
+            ->status('test status')
+            ->addProperty('newkey', 'newdata')
+            ->removeProperty('hello')
             ->output();
         $this->examJsonResult($result, 200, $this->testing_data);
     }
@@ -25,6 +28,7 @@ class JsonTest extends TestCase
         $result = ApiResponse::json()
             ->code(400)
             ->data($this->testing_data)
+            ->status('test status')
             ->output();
         $this->examJsonResult($result, 400, $this->testing_data);
     }
@@ -33,6 +37,7 @@ class JsonTest extends TestCase
         $result = ApiResponse::json()
             ->code(500)
             ->data($this->testing_data)
+            ->status('test status')
             ->output() ;
         $this->examJsonResult($result, 500, $this->testing_data);
     }
