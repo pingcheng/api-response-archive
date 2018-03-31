@@ -3,6 +3,7 @@
          convertErrorsToExceptions="true"
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true"
+         processIsolation="true"
 >
     <testsuites>
         <testsuite name="Class Test Suite">

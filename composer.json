@@ -14,13 +14,13 @@
         "php": ">=5.6",
         "spatie/array-to-xml": "^2.3.0"
     },
+    "require-dev": {
+        "phpunit/phpunit": "^5.7.27",
+        "satooshi/php-coveralls": "2.0.x-dev"
+    },
     "autoload": {
         "psr-4": {
             "PingCheng\\ApiResponse\\": "src/"
         }
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^5.7.27",
-        "satooshi/php-coveralls": "2.0.x-dev"
     }
 }

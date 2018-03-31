@@ -1,5 +1,4 @@
 <?php
-
 use PHPUnit\Framework\TestCase;
 use PingCheng\ApiResponse\ApiResponse;
 
@@ -19,6 +18,7 @@ class JsonTest extends TestCase
             ->data($this->testing_data)
             ->status('test status')
             ->addProperty('newkey', 'newdata')
+            ->addProperty('hello', 'hello')
             ->removeProperty('hello')
             ->output();
         $this->examJsonResult($result, 200, $this->testing_data);
