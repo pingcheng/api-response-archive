@@ -15,6 +15,7 @@ class ApiResponse
 {
     protected static $send_header = true;
     protected static $send_code = true;
+    protected static $headers = [];
 
     /**
      * return the result in json format
@@ -24,16 +25,36 @@ class ApiResponse
         return new JsonResponse(static::initOptions());
     }
 
+    /**
+     * return the reuslt in xml format
+     * @return XmlResponse
+     */
     public static function xml() {
         return new XmlResponse(static::initOptions());
     }
 
+    /**
+     * set if sending the headers
+     * @param bool $trueOrfalse
+     */
     public static function send_header($trueOrfalse = true) {
         static::$send_header = $trueOrfalse;
     }
 
+    /**
+     * set if send status code
+     * @param bool $trueOrfalse
+     */
     public static function send_status_code($trueOrfalse = true) {
-        static::$send_header = $trueOrfalse;
+        static::$send_code = $trueOrfalse;
+    }
+
+    /**
+     * set up the headers
+     * @param array $headers
+     */
+    public static function headers($headers = []) {
+        static::$headers = $headers;
     }
 
     /**
@@ -44,6 +65,7 @@ class ApiResponse
         return [
             'send_header' => static::$send_header,
             'send_code' => static::$send_code,
+            'headers' => static::$headers,
         ];
     }
 }

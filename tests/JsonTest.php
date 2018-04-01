@@ -42,6 +42,46 @@ class JsonTest extends TestCase
         $this->examJsonResult($result, 500, $this->testing_data);
     }
 
+    public function testUnknown() {
+        $result = ApiResponse::json()
+            ->code(900)
+            ->data($this->testing_data)
+            ->output();
+        $result = $this->examJsonResult($result, 900, $this->testing_data);
+        $this->assertEquals('unknown', $result->status);
+    }
+
+    public function testHeader() {
+        ApiResponse::json()
+            ->code(200)
+            ->addHeader('test', 'testing-header')
+            ->addHeader('test-deleted', '-')
+            ->removeHeader('test-deleted')
+            ->output();
+
+        $headers = xdebug_get_headers();
+        $this->assertContains('test: testing-header', $headers);
+        $this->assertNotContains('test-deleted: -', $headers);
+    }
+
+    public function testSettingHeaders() {
+        ApiResponse::send_header(false);
+        ApiResponse::json()
+            ->code(200)
+            ->output();
+
+        $headers = xdebug_get_headers();
+        $this->assertEmpty($headers);
+    }
+
+    public function testSettingCode() {
+        ApiResponse::send_status_code(false);
+        ApiResponse::json()
+            ->code(300)
+            ->output();
+        $this->assertFalse(http_response_code());
+    }
+
     protected function examJsonResult($result, $code = false, $data = null) {
         $this->assertJson($result);
 
@@ -52,6 +92,7 @@ class JsonTest extends TestCase
 
         if ($code) {
             $this->assertEquals($code, $json->code);
+            $this->assertEquals($code, http_response_code());
         }
 
         if (!is_null($data)) {

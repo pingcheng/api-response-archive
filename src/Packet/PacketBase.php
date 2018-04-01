@@ -10,6 +10,11 @@ namespace PingCheng\ApiResponse\Packet;
 
 abstract class PacketBase
 {
+    // settings
+    public $send_header = true;
+    public $send_code = true;
+
+
     // contains all the status description
     protected $statusCodes = [];
 
@@ -24,8 +29,8 @@ abstract class PacketBase
     protected $status_name = 'status';
     protected $data_name = 'data';
 
-    public $send_header = true;
-    public $send_code = true;
+    // headers
+    protected $headers = [];
 
     /**
      * process the data to the specific data format
@@ -100,21 +105,82 @@ abstract class PacketBase
     }
 
     /**
+     * add a new header
+     * @param $name
+     * @param $value
+     * @return $this
+     */
+    public function addHeader($name, $value) {
+        $this->headers[$name] = $value;
+        return $this;
+    }
+
+    /**
+     * remove a header
+     * @param $name
+     * @return $this
+     */
+    public function removeHeader($name) {
+        if (isset($this->headers[$name])) {
+            unset($this->headers[$name]);
+        }
+        return $this;
+    }
+
+    /**
+     * remove all headers
+     * @return $this
+     */
+    public function removeAllHeaders() {
+        $this->headers = [];
+        header_remove();
+        return $this;
+    }
+
+    /**
      * output the final data
      * @return mixed
      */
     public function output() {
-        if ($this->send_code) {
-            http_response_code($this->code);
-        }
-
-        if ($this->send_header) {
-            header($this->setHeader());
-        }
+        $this->initResponseCode();
+        $this->initHeaders();
 
         return $this->processData($this->data);
     }
 
+    /**
+     * prepare the response code
+     */
+    protected function initResponseCode() {
+        if ($this->send_code) {
+            http_response_code($this->code);
+        }
+    }
+
+    /**
+     * prepare the response headers
+     */
+    protected function initHeaders() {
+        if ($this->send_header) {
+            // setup the default headers
+            header($this->setHeader());
+
+            // setup other headers
+            if (!empty($this->headers)) {
+                foreach ($this->headers as $name => $value) {
+                    header("$name: $value");
+                }
+            }
+        } else {
+            // remove headers
+            header_remove();
+        }
+    }
+
+    /**
+     * init the response body
+     * @return array
+     */
     protected function initResponse() {
         $result = [
             $this->code_name => $this->code,
@@ -148,5 +214,6 @@ abstract class PacketBase
     protected function applyOptions($options) {
         $this->send_header = isset($options['send_header']) ? $options['send_header'] : $this->send_header;
         $this->send_code = isset($options['send_code']) ? $options['send_code'] : $this->send_code;
+        $this->headers = isset($options['headers']) ? $options['headers'] : $this->headers;
     }
 }
