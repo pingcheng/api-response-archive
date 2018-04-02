@@ -216,4 +216,15 @@ abstract class PacketBase
         $this->send_code = isset($options['send_code']) ? $options['send_code'] : $this->send_code;
         $this->headers = isset($options['headers']) ? $options['headers'] : $this->headers;
     }
+
+    /**
+     * Magic method
+     * to parse this object to a text response
+     * automatically call the output method
+     * @return mixed
+     */
+    public function __toString()
+    {
+        return $this->output();
+    }
 }

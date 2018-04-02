@@ -16,7 +16,8 @@ composer require pingcheng/api-response
 | XML  | ✅  |
 
 # Usage
- 
+
+## Basic
 ```php
 use PingCheng\ApiResponse\ApiResponse;
 ​
@@ -28,8 +29,7 @@ echo ApiResponse::json()
     ->data([
         'id' => '1234',
         'result' => 'accepted'
-    ])
-    ->output();
+    ]);
 ```
 The reuslt you would have
 ```json
@@ -58,8 +58,7 @@ echo ApiResponse::xml()
     ->data([
         'id' => '1234',
         'result' => 'accepted'
-    ])
-    ->output();
+    ]);
 ```
 
 the result you would have
@@ -75,12 +74,9 @@ the result you would have
 </root>
 ```
 
-If you need to remove a property added before, simple use
-```php
-...
-->removeProperty('name')
-...
-```
+## Property
+- addProperty(name, value);
+- removeProperty(name);
 
 Basically, ApiReponse would auto add a status description to the result based on the status code, for example, if you add 200 code to the response, the api would automatically add a status of "OK!". If you need to modify it, please use this function to add it or remove it
 ```php
@@ -94,3 +90,8 @@ Basically, ApiReponse would auto add a status description to the result based on
 ->removeProperty('status')
 ...
 ```
+
+## Headers control
+- addHeader(name, value);
+- removeHeader(name);
+- removeAllHeaders();
