@@ -8,8 +8,13 @@
 
 namespace PingCheng\ApiResponse\Packet;
 
+use PingCheng\ApiResponse\Traits\statusShortcuts;
+
 abstract class PacketBase
 {
+
+    use statusShortcuts;
+
     // settings
     public $send_header = true;
     public $send_code = true;
@@ -226,5 +231,12 @@ abstract class PacketBase
     public function __toString()
     {
         return $this->output();
+    }
+
+    /**
+     * send the message and die
+     */
+    public function send() {
+        die($this->output());
     }
 }

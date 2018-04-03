@@ -13,7 +13,7 @@ class JsonResponse extends PacketBase
 
     protected function processData($data)
     {
-        return json_encode($this->initResponse());
+        return json_encode($this->initResponse()) . PHP_EOL;
     }
 
     protected function setHeader()
