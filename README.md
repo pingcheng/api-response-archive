@@ -31,6 +31,21 @@ echo ApiResponse::json()
         'result' => 'accepted'
     ]);
 ```
+
+Or
+```php
+ApiResponse::json()
+    ->code(400)
+    ->addProperty('message', [
+        'your result has been accepted'
+    ])
+    ->data([
+        'id' => '1234',
+        'result' => 'accepted'
+    ])
+    ->send();
+// The program will stop by send() and return the result instantly
+```
 The reuslt you would have
 ```json
 {
@@ -95,3 +110,9 @@ Basically, ApiReponse would auto add a status description to the result based on
 - addHeader(name, value);
 - removeHeader(name);
 - removeAllHeaders();
+
+## Status shortcuts
+You can use short cuts to specific a status code
+```php
+ApiResponose::json()->success()->send();
+```
